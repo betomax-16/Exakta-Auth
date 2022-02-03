@@ -1,6 +1,5 @@
 import Sucursal, { ISucursal } from "../models/sucursal";
-import { ISucursalArea } from "../models/sucursal-area";
-import sucursalAreaController from "../controllers/sucursalAreaController";
+import { RequestExternalAPI } from "../utils/RequestExternalAPI";
 
 class SucursalController {
 
@@ -23,7 +22,15 @@ class SucursalController {
     static async create(data: ISucursal|any): Promise<ISucursal|null> {
         try {
             const newData: ISucursal = new Sucursal(data);
-            return await newData.save();
+            const res = await newData.save();
+            const auxData = {
+                name: res.name,
+                color: '#fff',
+                timeLimit: 15
+            };
+
+            RequestExternalAPI.request('POST', '/api/sucursal', auxData);
+            return res;
         } catch (error: any) {
             throw error;
         }
@@ -36,7 +43,17 @@ class SucursalController {
         }
 
         try {
-            return await Sucursal.updateOne({name: name}, { $set: data });
+            const res = await Sucursal.updateOne({name: name}, { $set: data });
+
+            if (res.modifiedCount) {
+                const auxData = {
+                    name: name
+                };
+    
+                RequestExternalAPI.request('PUT', `/api/sucursal/${name}`, auxData);
+            }
+
+            return res;
         } catch (error: any) {
             throw error;
         }
@@ -44,7 +61,10 @@ class SucursalController {
 
     static async delete(name: string): Promise<ISucursal|null> {
         try {
-            return await Sucursal.findOneAndDelete({name: name});
+            const res = await Sucursal.findOneAndDelete({name: name});
+
+            RequestExternalAPI.request('DELETE', `/api/sucursal/${name}`);
+            return res;
         } catch (error: any) {
             throw error;
         }

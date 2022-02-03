@@ -33,7 +33,7 @@ module.exports = (env, argv) => {
             new CopyPlugin({
                 patterns: [
                     { from: "./src/pages", to: "pages" },
-                    { context: '.', from: "swagger", to: "swagger" }
+                    { context: './src', from: "swagger", to: "swagger" }
                 ],
             }),
             new Dotenv({
