@@ -2,7 +2,7 @@ import http from "http";
 
 export class RequestExternalAPI {
 
-    public static async request(method: string, endPoint: string, body?: any): Promise<any> {
+    public static async request(method: string, endPoint: string, body?: any, headers?: any): Promise<any> {
         const API_AUTH = 'localhost';
         const API_AUTH_PORT = '4000';
         return new Promise((resolve, reject) => {
@@ -11,7 +11,7 @@ export class RequestExternalAPI {
                 port: API_AUTH_PORT,
                 path: endPoint,
                 method: method,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { ...headers, 'Content-Type': 'application/json' }
             };
     
             const req = http.request(options);

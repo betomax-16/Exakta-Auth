@@ -29,7 +29,7 @@ class SucursalController {
                 timeLimit: 15
             };
 
-            RequestExternalAPI.request('POST', '/api/sucursal', auxData);
+            RequestExternalAPI.request('POST', '/api/sucursal', auxData, {'me': ''});
             return res;
         } catch (error: any) {
             throw error;
@@ -50,7 +50,7 @@ class SucursalController {
                     name: name
                 };
     
-                RequestExternalAPI.request('PUT', `/api/sucursal/${name}`, auxData);
+                RequestExternalAPI.request('PUT', `/api/sucursal/${name}`, auxData, {'me': ''});
             }
 
             return res;
@@ -63,7 +63,7 @@ class SucursalController {
         try {
             const res = await Sucursal.findOneAndDelete({name: name});
 
-            RequestExternalAPI.request('DELETE', `/api/sucursal/${name}`);
+            RequestExternalAPI.request('DELETE', `/api/sucursal/${name}`, undefined, {'me': ''});
             return res;
         } catch (error: any) {
             throw error;
