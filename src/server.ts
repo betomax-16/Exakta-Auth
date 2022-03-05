@@ -29,9 +29,22 @@ class Server {
   private config(): void {
     getEnv();
 
-    const {MONGO_URI} = process.env;
+    const {MONGO_URI, MONGO_URI_AZURE, MONGO_USER_AZURE, MONGO_PASS_AZURE, MODE} = process.env;
 
-    mongoose.connect(MONGO_URI || '');
+    const URI = MODE === 'PROD' ? MONGO_URI_AZURE : MONGO_URI;
+    if (MODE === 'PROD') {
+      mongoose.connect(URI || '', {
+        auth: {
+          password: MONGO_PASS_AZURE,
+          username: MONGO_USER_AZURE
+        },
+        retryWrites: false
+      });
+    }
+    else {
+      mongoose.connect(URI || '');
+    }
+
     const db = mongoose.connection;
 
     db.on('error', function(err){
@@ -39,7 +52,7 @@ class Server {
     });
 
     db.once('open', function(){
-      console.log('Connection to DB successful');
+      console.log(`Connection to DB successful on: ${URI}`);
       new initDB();
     });
 

@@ -103,6 +103,7 @@ export class initDB {
                 reference: "Entre la 12 Pte. (Carretera Federal México-Puebla) y 10 Pte."
             });
             sucursalController.create({
+                name: "Teziutlán",
                 address: "Av. Teziutlán Norte #85, local 3 esq. San Martín Texmelucan Cerro de La Paz Puebla, Pue. C.P. 72160",
                 phoneNums: [
                     "(222) 226.62.73"
