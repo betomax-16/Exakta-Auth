@@ -4,6 +4,7 @@ import { ISucursal } from "./sucursal";
 import CredentialController from "../controllers/credentialController";
 import SucursalController from "../controllers/sucursalController";
 
+//id Brand
 export interface IUser extends Document {
   username: string;
   name: string;

@@ -1,6 +1,7 @@
 import { model, Schema, Model, Document } from 'mongoose';
 import * as bcrypt from "bcryptjs";
 
+//id Brand
 export interface ICredential extends Document {
   username: string;
   password?: string;

@@ -1,6 +1,7 @@
 import { model, Schema, Document } from 'mongoose';
 import sucursalAreaController from "../controllers/sucursalAreaController";
 
+//id Brand
 export interface ISucursal extends Document {
   name: string;
   address: string;
