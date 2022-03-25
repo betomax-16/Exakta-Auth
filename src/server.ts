@@ -1,7 +1,6 @@
-import express, {Application, Request, Response, NextFunction} from 'express';
+import express, {Application} from 'express';
 import cors from "cors";
 import mongoose from "mongoose";
-import router from './routes';
 import routerApi from './routes/api';
 import path from "path";
 import fs = require('fs');
@@ -48,7 +47,7 @@ class Server {
     }
     else if (MODE === 'DEV') {
       dataBase = MONGO_URI_DEV;
-      mongoose.connect(MONGO_URI_DEV || '');
+      mongoose.connect(MONGO_URI_DEV || '', { replicaSet: 'testrep' });
     }
 
     const db = mongoose.connection;
@@ -60,7 +59,7 @@ class Server {
     db.once('open', function(){
       console.log(`Mode: ${MODE}`);
       console.log(`Connection to DB successful on: ${dataBase}`);
-      new initDB();
+      // new initDB();
     });
 
     this.app.use(cors());
