@@ -40,11 +40,11 @@ class AuthRoute {
                     ResponseWrapper.handler(res, user, 200); 
                 }
                 else {
-                    ResponseWrapper.handler(res, { message: 'Invalid credentials.' }, 401); 
+                    ResponseWrapper.handler(res, { message: 'Credenciales invalidas.' }, 401); 
                 }
             }
             else {
-                ResponseWrapper.handler(res, { message: 'Invalid credentials.' }, 401);
+                ResponseWrapper.handler(res, { message: 'Credenciales invalidas.' }, 401);
             }
         } catch (error: any) {
             Errors.handler(error, res);
@@ -59,7 +59,7 @@ class AuthRoute {
                 ResponseWrapper.handler(res, result, 201); 
             }
             else {
-                ResponseWrapper.handler(res, { message: 'Error to create credentials.' }, 500);
+                ResponseWrapper.handler(res, { message: 'Error al crear las credenciales.' }, 500);
             }
         } catch (error: any) {
             Errors.handler(error, res);
@@ -70,10 +70,10 @@ class AuthRoute {
         try {
             const newCredential = await credentialController.update(req.params.username, req.body);
             if (newCredential.modifiedCount == 1) {
-                ResponseWrapper.handler(res, { message: 'Successful modification.' }, 201);
+                ResponseWrapper.handler(res, { message: 'Actualización exitosa.' }, 201);
             }
             else {
-                ResponseWrapper.handler(res, { message: 'No modification.' }, 500);
+                ResponseWrapper.handler(res, { message: 'Sin modificar.' }, 500);
             }
             
         } catch (error: any) {
@@ -86,10 +86,10 @@ class AuthRoute {
             const credential = await credentialController.delete(req.params.username);
             if (credential) {
                 const result = await userController.delete(req.params.username);
-                ResponseWrapper.handler(res, { message: 'Successful removal.' }, 200);
+                ResponseWrapper.handler(res, { message: 'Eliminación exitosa.' }, 200);
             }
             else {
-                ResponseWrapper.handler(res, { message: 'Non-existent credential.' }, 404);
+                ResponseWrapper.handler(res, { message: 'Credencial inexistente.' }, 404);
             }
             
         } catch (error: any) {

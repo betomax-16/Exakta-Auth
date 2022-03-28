@@ -75,7 +75,7 @@ class SucursalRoute {
                 ResponseWrapper.handler(res, suc, 200);
             }
             else {
-                ResponseWrapper.handler(res, { message: 'No modification.' }, 500);
+                ResponseWrapper.handler(res, { message: 'Sin modificar.' }, 500);
             }
         } catch (error: any) {
             Errors.handler(error, res);
@@ -86,10 +86,10 @@ class SucursalRoute {
         try {
             const result: ISucursal|null = await sucursalController.delete(req.params.name);
             if (result) {
-                ResponseWrapper.handler(res, { message: 'Successful removal.' }, 200);
+                ResponseWrapper.handler(res, { message: 'Eliminación exitosa.' }, 200);
             }
             else {
-                ResponseWrapper.handler(res, { message: 'Non-existent sucursal.' }, 404);
+                ResponseWrapper.handler(res, { message: 'Sucursal inexistente.' }, 404);
             }
         } catch (error: any) {
             Errors.handler(error, res);

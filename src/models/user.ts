@@ -29,14 +29,14 @@ const UserSchema: Schema = new Schema({
   if (this.username) {
     const res: ICredential|null = await CredentialController.get(this.username);
     if (!res) {
-        next(new Error(`Non-existent "username": "${this.username}".`));
+        next(new Error(`Usuario inexistente: "${this.username}".`));
     }
   }
 
   if (this.sucursal) {
     const res: ISucursal|null = await SucursalController.get(this.sucursal);
     if (!res) {
-        next(new Error(`Non-existent "sucursal": "${this.sucursal}".`));
+        next(new Error(`Sucursal inexistente: "${this.sucursal}".`));
     }
   }
   next();

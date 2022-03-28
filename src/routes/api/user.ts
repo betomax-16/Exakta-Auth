@@ -62,10 +62,10 @@ class UserRoute {
         try {
             const newUser = await userController.update(req.params.username, req.body);
             if (newUser.modifiedCount == 1) {
-                ResponseWrapper.handler(res, { message: 'Successful modification.' }, 200);
+                ResponseWrapper.handler(res, { message: 'Actualización exitosa.' }, 200);
             }
             else {
-                ResponseWrapper.handler(res, { message: 'No modification.' }, 500);
+                ResponseWrapper.handler(res, { message: 'Sin modificar.' }, 500);
             }
             
         } catch (error: any) {
@@ -77,10 +77,10 @@ class UserRoute {
         try {
             const result = await userController.delete(req.params.username);
             if (result) {
-                ResponseWrapper.handler(res, { message: 'Successful removal.' }, 200);
+                ResponseWrapper.handler(res, { message: 'Eliminación exitosa.' }, 200);
             }
             else {
-                ResponseWrapper.handler(res, { message: 'Non-existent user.' }, 404);
+                ResponseWrapper.handler(res, { message: 'Usuario inexistente.' }, 404);
             }
             
         } catch (error: any) {
