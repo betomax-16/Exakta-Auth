@@ -1,5 +1,6 @@
 import Sucursal, { ISucursal } from "../models/sucursal";
 import { RequestExternalAPI } from "../utils/RequestExternalAPI";
+import querystring  from "querystring";
 
 class SucursalController {
 
@@ -50,7 +51,8 @@ class SucursalController {
                     name: name
                 };
     
-                RequestExternalAPI.request('PUT', `/api/sucursal/${name}`, auxData, {'me': ''});
+                const suc = querystring.escape(name);
+                RequestExternalAPI.request('PUT', `/api/sucursal/${suc}`, auxData, {'me': ''});
             }
 
             return res;
@@ -63,7 +65,8 @@ class SucursalController {
         try {
             const res = await Sucursal.findOneAndDelete({name: name});
 
-            RequestExternalAPI.request('DELETE', `/api/sucursal/${name}`, undefined, {'me': ''});
+            const suc = querystring.escape(name);
+            RequestExternalAPI.request('DELETE', `/api/sucursal/${suc}`, undefined, {'me': ''});
             return res;
         } catch (error: any) {
             throw error;
